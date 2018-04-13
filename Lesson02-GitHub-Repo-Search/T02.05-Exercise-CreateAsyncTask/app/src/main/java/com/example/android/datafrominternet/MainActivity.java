@@ -15,6 +15,7 @@
  */
 package com.example.android.datafrominternet;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Referans XML View Elemanları
     private EditText mSearchBoxEditText;
 
     private TextView mUrlDisplayTextView;
@@ -56,17 +58,15 @@ public class MainActivity extends AppCompatActivity {
         String githubQuery = mSearchBoxEditText.getText().toString();
         URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
         mUrlDisplayTextView.setText(githubSearchUrl.toString());
-        String githubSearchResults = null;
-        try {
-            githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
-            mSearchResultsTextView.setText(githubSearchResults);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // TODO (4) Create a new GithubQueryTask and call its execute method, passing in the url to query
-    }
+            
 
-    // TODO (1) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
+        // TODO (4) Create a new GithubQueryTask and call its execute method, passing in the url to query
+
+        new GithubQueryTask().execute(githubSearchUrl); // İlgili URL 'i AsyncTask ' e gönder. İşlem yapsın.
+
+    } // Sorgu Parametresine göre URL Oluşturuyor.
+
+    // TODO (COMPLETED) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
     // TODO (2) Override the doInBackground method to perform the query. Return the results. (Hint: You've already written the code to perform the query)
     // TODO (3) Override onPostExecute to display the results in the TextView
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
+    } // OptionsMenu Şişirme Metodu
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -84,5 +84,36 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    } // OptionsMenu Seçime Göre İşlem
+
+
+    public class GithubQueryTask extends AsyncTask<URL, Void, String> {
+
+
+        @Override
+        protected String doInBackground(URL... urls) {
+
+            URL searchUrl = urls[0]; // İlk url buraya alındı.
+            String githubSearchResults = null;
+            try {
+                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+                mSearchResultsTextView.setText(githubSearchResults);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return githubSearchResults;
+
+
+        }
+
+        // UI Thread İşlemi
+        @Override
+        protected void onPostExecute(String githubSearchResults) {
+            if (githubSearchResults != null && !githubSearchResults.equals("")) {
+                mSearchResultsTextView.setText(githubSearchResults);
+            }
+        }
     }
+
 }

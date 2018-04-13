@@ -17,8 +17,11 @@ package com.example.android.datafrominternet;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,22 +43,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Do 2 - 7 in menu.xml ///////////////////////////////////////////////////////////////////////
-    // TODO (2) Create a menu xml called 'main.xml' in the res->menu folder
-    // TODO (3) Add one menu item to your menu
-    // TODO (4) Give the menu item an id of @+id/action_search
-    // TODO (5) Set the orderInCategory to 1
-    // TODO (6) Show this item if there is room (use app:showAsAction, not android:showAsAction)
-    // TODO (7) Set the title to the search string ("Search") from strings.xml
+    // TODO (COMPLETED) Create a menu xml called 'main.xml' in the res->menu folder
+    // TODO (COMPLETED) Add one menu item to your menu
+    // TODO (COMPLETED) Give the menu item an id of @+id/action_search
+    // TODO (COMPLETED) Set the orderInCategory to 1
+    // TODO (COMPLETED) Show this item if there is room (use app:showAsAction, not android:showAsAction)
+    // TODO (COMPLETED) Set the title to the search string ("Search") from strings.xml
     // Do 2 - 7 in menu.xml ///////////////////////////////////////////////////////////////////////
 
 
-    // TODO (8) Override onCreateOptionsMenu
-    // TODO (9) Within onCreateOptionsMenu, use getMenuInflater().inflate to inflate the menu
-    // TODO (10) Return true to display your menu
+    // TODO (COMPLETED) Override onCreateOptionsMenu
+    // TODO (COMPLETED) Within onCreateOptionsMenu, use getMenuInflater().inflate to inflate the menu
+    // TODO (COMPLETED) Return true to display your menu
+
+    // Menüyü şişirme işlemi - XML Menü ' yü View Elemanı olarak göstermek için. - JAVA KODUNDA
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
 
     // TODO (11) Override onOptionsItemSelected
     // TODO (12) Within onOptionsItemSelected, get the ID of the item that was selected
     // TODO (13) If the item's ID is R.id.action_search, show a Toast and return true to tell Android that you've handled this menu click
     // TODO (14) Don't forgot to call .show() on your Toast
     // TODO (15) If you do NOT handle the menu click, return super.onOptionsItemSelected to let Android handle the menu click
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int selectedMenu = item.getItemId();
+        if (selectedMenu == R.id.action_search) {
+
+            Toast.makeText(getApplicationContext(), "Arama Menüsü Seçildi", Toast.LENGTH_LONG).show();
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }

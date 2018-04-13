@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.datafrominternet.utilities.NetworkUtils;
@@ -36,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mSearchResultsTextView;
 
-    // TODO (12) Create a variable to store a reference to the error message TextView
+    // TODO (COMPLETED) Create a variable to store a reference to the error message TextView
+    private TextView mErrorMessageTextView;
 
-    // TODO (24) Create a ProgressBar variable to store a reference to the ProgressBar
+
+    // TODO (COMPLETED) Create a ProgressBar variable to store a reference to the ProgressBar
+
+    private ProgressBar mProgressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +57,12 @@ public class MainActivity extends AppCompatActivity {
         mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
         mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
 
-        // TODO (13) Get a reference to the error TextView using findViewById
+        // TODO (COMPLETED) Get a reference to the error TextView using findViewById
+        mErrorMessageTextView = (TextView) findViewById(R.id.tv_error_message_display);
 
-        // TODO (25) Get a reference to the ProgressBar using findViewById
+
+        // TODO (COMPLETED) Get a reference to the ProgressBar using findViewById
+        mProgressBar = (ProgressBar) findViewById(R.id.pb_loading_indicator);
     }
 
     /**
@@ -68,13 +78,39 @@ public class MainActivity extends AppCompatActivity {
         new GithubQueryTask().execute(githubSearchUrl);
     }
 
-    // TODO (14) Create a method called showJsonDataView to show the data and hide the error
+    // TODO (COMPLETED) Create a method called showJsonDataView to show the data and hide the error
 
-    // TODO (15) Create a method called showErrorMessage to show the error and hide the data
+    void showJsonDataView(){
+    // Öncelik olarak hata görünmez olduğundan emin olunmalıdır.
+    mErrorMessageTextView.setVisibility(View.INVISIBLE);
+    // Ardından JSON verilerinin görünür olduğundan emin olunması gerekir.
+
+    mSearchResultsTextView.setVisibility(View.VISIBLE);
+
+
+    }
+
+
+    // TODO (COMPLETED) Create a method called showErrorMessage to show the error and hide the data
+
+    void showErrorMessage(){
+        // Çıktı Gizlenmeli.
+        mSearchResultsTextView.setVisibility(View.INVISIBLE);
+        // Hata mesajı gösterilmeli.
+        mErrorMessageTextView.setVisibility(View.VISIBLE);
+
+    }
 
     public class GithubQueryTask extends AsyncTask<URL, Void, String> {
 
-        // TODO (26) Override onPreExecute to set the loading indicator to visible
+        // TODO (COMPLETED) Override onPreExecute to set the loading indicator to visible
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(URL... params) {
@@ -90,12 +126,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String githubSearchResults) {
-            // TODO (27) As soon as the loading is complete, hide the loading indicator
+            // TODO (COMPLETED) As soon as the loading is complete, hide the loading indicator
+
+            mProgressBar.setVisibility(View.INVISIBLE); // Sadece onPreExecute içerisinde Loading gösterilemlidir.
+
             if (githubSearchResults != null && !githubSearchResults.equals("")) {
-                // TODO (17) Call showJsonDataView if we have valid, non-null results
+                // TODO (COMPLETED) Call showJsonDataView if we have valid, non-null results
+                showJsonDataView(); // Eğer bastılacak json veri var ise burada çağırılır.
                 mSearchResultsTextView.setText(githubSearchResults);
             }
-            // TODO (16) Call showErrorMessage if the result is null in onPostExecute
+            // TODO (COMPLETED) Call showErrorMessage if the result is null in onPostExecute
+
+            showErrorMessage(); // Eğer Json verisi gelmediyse hata bastıracak metot.
         }
     }
 

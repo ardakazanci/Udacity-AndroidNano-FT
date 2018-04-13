@@ -15,9 +15,12 @@
  */
 package com.example.android.datafrominternet.utilities;
 
+import android.net.Uri;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -45,8 +48,25 @@ public class NetworkUtils {
      * @return The URL to use to query the weather server.
      */
     public static URL buildUrl(String githubSearchQuery) {
-        // TODO (1) Fill in this method to build the proper Github query URL
-        return null;
+        // TODO (COMPLETED) Fill in this method to build the proper Github query URL
+        // Yol haritası ilk URI oluşturulur Sonra URL ' e dönüştürülür. Bu örnekte kullanıcıdan alınan sorgu parametresi eklenir.
+
+        Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon()
+                .appendQueryParameter(PARAM_QUERY, githubSearchQuery)
+                .appendQueryParameter(PARAM_SORT, sortBy)
+                .build();
+
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+
+        } catch (MalformedURLException e) {
+
+            e.printStackTrace();
+        }
+
+        return url;
     }
 
     /**
@@ -56,22 +76,22 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+    public static String getResponseFromHttpUrl(URL url) throws IOException { // HTTP isteği atma metodu
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection(); // belirtilen url ' e http isteği atıyor.
         try {
-            InputStream in = urlConnection.getInputStream();
+            InputStream in = urlConnection.getInputStream(); // InputStream ile birlikte istek sonucu verileri arabelleğe alıyoruz.
 
-            Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
+            Scanner scanner = new Scanner(in); // input stream alıyor. Okunmuş değerleri
+            scanner.useDelimiter("\\A"); // Hepsini alacağını söylüyor. Sınırlayıcı
 
-            boolean hasInput = scanner.hasNext();
+            boolean hasInput = scanner.hasNext(); // Okunacak veri kalıp kalmadığını kontrol ediyor.
             if (hasInput) {
-                return scanner.next();
+                return scanner.next(); // tüm verileri string almak için kullanılır.
             } else {
-                return null;
+                return null; // yoksa null dönüyor.
             }
         } finally {
-            urlConnection.disconnect();
+            urlConnection.disconnect(); // Bağlantıyı kapatıyoruz.
         }
     }
 }

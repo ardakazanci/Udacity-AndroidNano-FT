@@ -31,14 +31,15 @@ public class NetworkUtils {
 
     final static String GITHUB_BASE_URL =
             "https://api.github.com/search/repositories";
+    // Genel API İstek adresi
 
-    final static String PARAM_QUERY = "q";
+    final static String PARAM_QUERY = "q"; // Sorgu Parametresi
 
     /*
      * The sort field. One of stars, forks, or updated.
      * Default: results are sorted by best match if no field is specified.
      */
-    final static String PARAM_SORT = "sort";
+    final static String PARAM_SORT = "sort"; //
     final static String sortBy = "stars";
 
     /**
@@ -61,7 +62,7 @@ public class NetworkUtils {
         }
 
         return url;
-    }
+    } // URL Oluşturuyor.
 
     /**
      * This method returns the entire result from the HTTP response.
@@ -87,5 +88,7 @@ public class NetworkUtils {
         } finally {
             urlConnection.disconnect();
         }
-    }
+    } // HTTP İsteği atıp , dönüt alıyor. InputStream ile .
+
+
 }
