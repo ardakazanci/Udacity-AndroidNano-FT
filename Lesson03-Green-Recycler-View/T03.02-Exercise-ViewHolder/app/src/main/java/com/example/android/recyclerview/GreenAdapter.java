@@ -23,21 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * We couldn't come up with a good name for this class. Then, we realized
- * that this lesson is about RecyclerView.
- *
- * RecyclerView... Recycling... Saving the planet? Being green? Anyone?
- * #crickets
- *
- * Avoid unnecessary garbage collection by using RecyclerView and ViewHolders.
- *
- * If you don't like our puns, we named this Adapter GreenAdapter because its
- * contents are green.
- */
 public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHolder> {
 
-    // TODO (1) Create a layout resource in res/layout/ called number_list_item.xml
+    // TODO (COMPLETED) Create a layout resource in res/layout/ called number_list_item.xml
 
     // Do steps 2 - 11 within number_list_item.xml
     // TODO (2) Make the root layout a FrameLayout

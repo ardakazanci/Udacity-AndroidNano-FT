@@ -23,45 +23,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * We couldn't come up with a good name for this class. Then, we realized
- * that this lesson is about RecyclerView.
- *
- * RecyclerView... Recycling... Saving the planet? Being green? Anyone?
- * #crickets
- *
- * Avoid unnecessary garbage collection by using RecyclerView and ViewHolders.
- *
- * If you don't like our puns, we named this Adapter GreenAdapter because its
- * contents are green.
- */
 public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHolder> {
 
-    private static final String TAG = GreenAdapter.class.getSimpleName();
+    private static final String TAG = GreenAdapter.class.getSimpleName(); // LOG Belirteci
 
     private int mNumberItems;
 
     /**
-     * Constructor for GreenAdapter that accepts a number of items to display and the specification
-     * for the ListItemClickListener.
      *
-     * @param numberOfItems Number of items to display in list
+     *
+     * @param numberOfItems Listede görüntülecek öğe sayısı
      */
-    public GreenAdapter(int numberOfItems) {
+    public GreenAdapter(int numberOfItems) { // Tıklama olayları için hangi viewholder ' a tıklandığını belirten position bilgisi
         mNumberItems = numberOfItems;
     }
 
     /**
      *
-     * This gets called when each new ViewHolder is created. This happens when the RecyclerView
-     * is laid out. Enough ViewHolders will be created to fill the screen and allow for scrolling.
+     * Bu metot yeterli miktarda viewHolder oluşturacaktır.
      *
-     * @param viewGroup The ViewGroup that these ViewHolders are contained within.
-     * @param viewType  If your RecyclerView has more than one type of item (which ours doesn't) you
-     *                  can use this viewType integer to provide a different layout. See
-     *                  {@link android.support.v7.widget.RecyclerView.Adapter#getItemViewType(int)}
-     *                  for more details.
-     * @return A new NumberViewHolder that holds the View for each list item
+     *
+     * @param viewGroup ViewHolders'ın içerdiği ViewGroup
+     * @param viewType  View Tipi - Özel tip olarak layout olarak belirlendi . int olarak çağırılacak
+     * @return - Teker teker görünüm dönrüecek. NumberViewHolder isminde
      */
     @Override
     public NumberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -77,14 +61,10 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
     }
 
     /**
-     * OnBindViewHolder is called by the RecyclerView to display the data at the specified
-     * position. In this method, we update the contents of the ViewHolder to display the correct
-     * indices in the list for this particular position, using the "position" argument that is conveniently
-     * passed into us.
+     *Gösterilecek verinin doğru pozisyonda gösterilmesini sağlar.
      *
-     * @param holder   The ViewHolder which should be updated to represent the contents of the
-     *                 item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
+     * @param holder   : İlgili pozisyona göre doğru içeriğin güncelleştirilmesini sağlar.
+     * @param position Adapter içerisinden alınan pozisyona bilgisi
      */
     @Override
     public void onBindViewHolder(NumberViewHolder holder, int position) {
@@ -93,8 +73,7 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
     }
 
     /**
-     * This method simply returns the number of items to display. It is used behind the scenes
-     * to help layout our Views and for animations.
+     * Görüntülenecek öğe sayısı
      *
      * @return The number of items available in our forecast
      */

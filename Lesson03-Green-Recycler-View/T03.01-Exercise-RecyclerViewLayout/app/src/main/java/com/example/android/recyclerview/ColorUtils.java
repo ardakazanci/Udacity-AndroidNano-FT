@@ -20,18 +20,12 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
 /**
- * ColorUtils is a class with one method, used to color the ViewHolders in
- * the RecyclerView. I put in a separate class in an attempt to keep the
- * code organized.
- *
- * We aren't going to go into detail about how this method works, but feel
- * free to explore!
- */
+ * ViewHolders'ı renkledirmek için kullanılan bir yönteme sahiptir.
+ **/
 public class ColorUtils {
 
     /**
-     * This method returns the appropriate shade of green to form the gradient
-     * seen in the list, based off of the order in which the
+     * Bu yöntem Renk Değişimi sağlamak için oluşturuldu.
      * {@link com.example.android.recyclerview.GreenAdapter.NumberViewHolder}
      * instance was created.
      *
@@ -41,16 +35,15 @@ public class ColorUtils {
      * {@link com.example.android.recyclerview.GreenAdapter.NumberViewHolder}'s will be
      * recycled and the list will no longer appear as a consistent gradient.
      *
-     * @param context     Context for getting colors
-     * @param instanceNum Order in which the calling ViewHolder was created
+     * @param context     Renkleri almak için içerik
+     * @param instanceNum ViewHolder Sırası
      *
-     * @return A shade of green based off of when the calling ViewHolder
-     * was created.
+     * @return Yeşil renkli viewHolder döndürülmesi.
      */
     public static int getViewHolderBackgroundColorFromInstance(Context context, int instanceNum) {
         switch (instanceNum) {
             case 0:
-                return ContextCompat.getColor(context, R.color.material50Green);
+                return ContextCompat.getColor(context, R.color.material50Green); // Bağlam aracılığıyla renk ataması döndürülüyor.
             case 1:
                 return ContextCompat.getColor(context, R.color.material100Green);
             case 2:
