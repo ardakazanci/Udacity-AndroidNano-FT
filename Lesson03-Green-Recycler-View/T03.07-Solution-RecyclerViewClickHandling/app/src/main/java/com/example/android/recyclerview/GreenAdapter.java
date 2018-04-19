@@ -40,75 +40,27 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
 
     private static final String TAG = GreenAdapter.class.getSimpleName();
 
-    // COMPLETED (3) Create a final private ListItemClickListener called mOnClickListener
-    /*
-     * An on-click handler that we've defined to make it easy for an Activity to interface with
-     * our RecyclerView
-     */
+
     final private ListItemClickListener mOnClickListener;
 
-    /*
-     * The number of ViewHolders that have been created. Typically, you can figure out how many
-     * there should be by determining how many list items fit on your screen at once and add 2 to 4
-     * to that number. That isn't the exact formula, but will give you an idea of how many
-     * ViewHolders have been created to display any given RecyclerView.
-     *
-     * Here's some ASCII art to hopefully help you understand:
-     *
-     *    ViewHolders on screen:
-     *
-     *        *-----------------------------*
-     *        |         ViewHolder index: 0 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 1 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 2 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 3 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 4 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 5 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 6 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 7 |
-     *        *-----------------------------*
-     *
-     *    Extra ViewHolders (off screen)
-     *
-     *        *-----------------------------*
-     *        |         ViewHolder index: 8 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 9 |
-     *        *-----------------------------*
-     *        |         ViewHolder index: 10|
-     *        *-----------------------------*
-     *        |         ViewHolder index: 11|
-     *        *-----------------------------*
-     *
-     *    Total number of ViewHolders = 11
-     */
-    private static int viewHolderCount;
 
-    private int mNumberItems;
 
-    // COMPLETED (1) Add an interface called ListItemClickListener
-    // COMPLETED (2) Within that interface, define a void method called onListItemClick that takes an int as a parameter
+    private static int viewHolderCount; // Oluşturulan ViewHolder sayısını tutacak
+
+    private int mNumberItems; // Oluşacak item sayısı
+
+
     /**
-     * The interface that receives onClick messages.
+     * Tıklama iletilerini alan arayüz.
      */
     public interface ListItemClickListener {
         void onListItemClick(int clickedItemIndex);
     }
 
-    // COMPLETED (4) Add a ListItemClickListener as a parameter to the constructor and store it in mOnClickListener
+
     /**
-     * Constructor for GreenAdapter that accepts a number of items to display and the specification
-     * for the ListItemClickListener.
-     *
      * @param numberOfItems Number of items to display in list
-     * @param listener Listener for list item clicks
+     * @param listener Tıklamaları dinleyen argüman
      */
     public GreenAdapter(int numberOfItems, ListItemClickListener listener) {
         mNumberItems = numberOfItems;
@@ -166,20 +118,15 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
         holder.bind(position);
     }
 
-    /**
-     * This method simply returns the number of items to display. It is used behind the scenes
-     * to help layout our Views and for animations.
-     *
-     * @return The number of items available
-     */
+
     @Override
     public int getItemCount() {
         return mNumberItems;
     }
 
-    // COMPLETED (5) Implement OnClickListener in the NumberViewHolder class
+
     /**
-     * Cache of the children views for a list item.
+     * Bir liste görünüşü için çocukların liste öğeleri.
      */
     class NumberViewHolder extends RecyclerView.ViewHolder
         implements OnClickListener {
@@ -189,26 +136,19 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
         // Will display which ViewHolder is displaying this data
         TextView viewHolderIndex;
 
-        /**
-         * Constructor for our ViewHolder. Within this constructor, we get a reference to our
-         * TextViews and set an onClickListener to listen for clicks. Those will be handled in the
-         * onClick method below.
-         * @param itemView The View that you inflated in
-         *                 {@link GreenAdapter#onCreateViewHolder(ViewGroup, int)}
-         */
+
         public NumberViewHolder(View itemView) {
             super(itemView);
 
             listItemNumberView = (TextView) itemView.findViewById(R.id.tv_item_number);
             viewHolderIndex = (TextView) itemView.findViewById(R.id.tv_view_holder_instance);
-            // COMPLETED (7) Call setOnClickListener on the View passed into the constructor (use 'this' as the OnClickListener)
+            // this-> in anlamı bu sınıftaki implementi ifade eder.
             itemView.setOnClickListener(this);
         }
 
         /**
-         * A method we wrote for convenience. This method will take an integer as input and
-         * use that integer to display the appropriate text within a list item.
-         * @param listIndex Position of the item in the list
+         *İlgili pozisyonda ki viewholder sayısını göstermek için belirledik.
+         * @param listIndex İlgili itemin pozisyonu
          */
         void bind(int listIndex) {
             listItemNumberView.setText(String.valueOf(listIndex));
@@ -217,8 +157,8 @@ public class GreenAdapter extends RecyclerView.Adapter<GreenAdapter.NumberViewHo
 
         // COMPLETED (6) Override onClick, passing the clicked item's position (getAdapterPosition()) to mOnClickListener via its onListItemClick method
         /**
-         * Called whenever a user clicks on an item in the list.
-         * @param v The View that was clicked
+         * Bir kullanıcı listede herhangi bir öğeye tıkladığında çağırılacak metot.
+         * @param v Tıklanan Öğe.
          */
         @Override
         public void onClick(View v) {

@@ -23,25 +23,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-// COMPLETED (8) Implement GreenAdapter.ListItemClickListener from the MainActivity
+
 public class MainActivity extends AppCompatActivity
         implements GreenAdapter.ListItemClickListener {
 
     private static final int NUM_LIST_ITEMS = 100;
 
-    /*
-     * References to RecyclerView and Adapter to reset the list to its
-     * "pretty" state when the reset menu item is clicked.
-     */
+
     private GreenAdapter mAdapter;
     private RecyclerView mNumbersList;
 
-    // COMPLETED (9) Create a Toast variable called mToast to store the current Toast
-    /*
-     * If we hold a reference to our Toast, we can cancel it (if it's showing)
-     * to display a new Toast. If we didn't do this, Toasts would be delayed
-     * in showing up if you clicked many list items in quick succession.
-     */
+
     private Toast mToast;
 
     @Override
