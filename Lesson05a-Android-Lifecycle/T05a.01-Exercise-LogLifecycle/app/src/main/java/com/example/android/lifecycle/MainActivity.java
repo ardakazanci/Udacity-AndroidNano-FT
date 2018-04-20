@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Called when the activity is first created. This is where you should do all of your normal
      * static set up: create views, bind data to lists, etc.
-     *
+     * <p>
      * Always followed by onStart().
      *
      * @param savedInstanceState The Activity's previously frozen state, if there was one.
@@ -47,20 +47,65 @@ public class MainActivity extends AppCompatActivity {
 
         mLifecycleDisplay = (TextView) findViewById(R.id.tv_lifecycle_events_display);
 
-        // TODO (1) Use logAndAppend within onCreate
+        // TODO (COMPLETED) Use logAndAppend within onCreate
+
+        Log.i(TAG, ON_CREATE);
+
     }
 
-    // TODO (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
+    // TODO (COMPLETED) Override onStart, call super.onStart, and call logAndAppend with ON_START
 
-    // TODO (3) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, ON_START);
+    }
 
-    // TODO (4) Override onPause, call super.onPause, and call logAndAppend with ON_PAUSE
 
-    // TODO (5) Override onStop, call super.onStop, and call logAndAppend with ON_STOP
+    // TODO (COMPLETED) Override onResume, call super.onResume, and call logAndAppend with ON_RESUME
 
-    // TODO (6) Override onRestart, call super.onRestart, and call logAndAppend with ON_RESTART
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, ON_RESUME);
+    }
 
-    // TODO (7) Override onDestroy, call super.onDestroy, and call logAndAppend with ON_DESTROY
+
+    // TODO (COMPLETED) Override onPause, call super.onPause, and call logAndAppend with ON_PAUSE
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, ON_PAUSE);
+    }
+
+
+    // TODO (COMPLETED) Override onStop, call super.onStop, and call logAndAppend with ON_STOP
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, ON_STOP);
+    }
+
+
+    // TODO (COMPLETED) Override onRestart, call super.onRestart, and call logAndAppend with ON_RESTART
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, ON_RESTART);
+    }
+
+
+    // TODO (COMPLETED) Override onDestroy, call super.onDestroy, and call logAndAppend with ON_DESTROY
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, ON_DESTROY);
+    }
 
     /**
      * Logs to the console and appends the lifecycle method name to the TextView so that you can
