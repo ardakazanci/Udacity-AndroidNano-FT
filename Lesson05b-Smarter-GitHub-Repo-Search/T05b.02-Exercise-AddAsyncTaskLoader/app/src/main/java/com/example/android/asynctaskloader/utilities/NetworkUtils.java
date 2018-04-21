@@ -28,16 +28,17 @@ import java.util.Scanner;
  * These utilities will be used to communicate with the network.
  */
 public class NetworkUtils {
-
+    // İstek yapılacak TEMEL URL
     final static String GITHUB_BASE_URL =
             "https://api.github.com/search/repositories";
-
+    // URL'e sorgu için atmamız gereken parametre
     final static String PARAM_QUERY = "q";
 
     /*
      * The sort field. One of stars, forks, or updated.
      * Default: results are sorted by best match if no field is specified.
      */
+    // Genel parametreler için sabit değişkenler
     final static String PARAM_SORT = "sort";
     final static String sortBy = "stars";
 
@@ -47,6 +48,8 @@ public class NetworkUtils {
      * @param githubSearchQuery The keyword that will be queried for.
      * @return The URL to use to query the weather server.
      */
+
+    // URL Oluşturma - Uri aracılığıyla  Return URL
     public static URL buildUrl(String githubSearchQuery) {
         Uri builtUri = Uri.parse(GITHUB_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_QUERY, githubSearchQuery)
@@ -70,6 +73,8 @@ public class NetworkUtils {
      * @return The contents of the HTTP response.
      * @throws IOException Related to network and stream reading
      */
+
+    // HTTP İsteği gönderme - URL ' e ve Dönen sonuç JSON
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
